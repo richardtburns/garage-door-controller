@@ -125,6 +125,8 @@ class Controller(object):
                     self.ifttt_key = config['alerts']['ifttt']['key']
                     self.ifttt_event = config['alerts']['ifttt']['event']
                     syslog.syslog("we are using IFTTT")
+                elif alert == 'firebase':
+                    syslog.syslog("we are using Firebase")
         else:
             self.alert_type = None
             syslog.syslog("No alerts configured")
@@ -172,6 +174,8 @@ class Controller(object):
                 self.send_pushover(door, title, message)
             elif alert == 'telegram':
                 self.send_telegram(door, title, message)
+            elif alert == 'firebase':
+                self.send_firebase(door, title, message)
 
     def send_email(self, title, message):
         try:
@@ -270,6 +274,28 @@ class Controller(object):
             conn.getresponse()
         except Exception as inst:
             syslog.syslog("Error updating ifttt: " + str(inst))
+
+    def send_firebase(self, door, title, message):
+        try:
+            syslog.syslog("Sending Firebase message")
+            config = self.config['alerts']['firebase']
+            conn = httplib.HTTPSConnection("fcm.googleapis.com")
+            topic = "/topics/%s" % config['topic']
+            syslog.syslog(topic)
+            conn.request("POST", "/fcm/send",
+                    json.dumps({
+                        "to": topic,
+                        "data": {
+                            "body": message,
+                            "title": title,
+                            "android_channel_id": config['android_channel_id'],
+                            "tag": door.id,
+                            "relay_pin": door.relay_pin
+                        }
+                    }), {'Authorization':'key=' + config['api_key'], 'Content-Type': 'application/json'})
+            syslog.syslog(conn.getresponse().read())
+        except:
+            sys.syslog("Error sending to firebase: " + str(inst))
 
     def update_openhab(self, item, state):
         try:
