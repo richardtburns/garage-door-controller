@@ -54,26 +54,26 @@
     },
     "doors":{
         "left":{
-            "name":"LEFT",
+            "name":"BIG",
             "relay_pin":23,
+            "state_pin":22,
+            "state_pin_closed_value":0,
+            "approx_time_to_close":15,
+            "approx_time_to_open":15,
+            "openhab_name":"g_door_big",
+            "ifttt_event_open":"g_door_big_open",
+            "ifttt_event_close":"g_door_big_close"
+        },
+        "right":{
+            "name":"SMALL",
+            "relay_pin":24,
             "state_pin":27,
             "state_pin_closed_value":0,
             "approx_time_to_close":15,
             "approx_time_to_open":15,
-            "openhab_name":"g_door_left",
-            "ifttt_event_open":"g_door_left_open",
-            "ifttt_event_close":"g_door_left_close"
-        },
-        "right":{
-            "name":"RIGHT",
-            "relay_pin":24,
-            "state_pin":21,
-            "state_pin_closed_value":0,
-            "approx_time_to_close":15,
-            "approx_time_to_open":15,
-            "openhab_name":"g_door_right",
-            "ifttt_event_open":"g_door_right_open",
-            "ifttt_event_close":"g_door_right_close"
+            "openhab_name":"g_door_small",
+            "ifttt_event_open":"g_door_small_open",
+            "ifttt_event_close":"g_door_small_close"
         }
     }
 }
