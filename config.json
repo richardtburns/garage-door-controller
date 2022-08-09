@@ -30,6 +30,11 @@
         "telegram":{
             "chat_id":"<CHAT_ID>",
             "api_token":"<API_TOKEN>"
+        },
+        "firebase:{
+            "topic":"<TOPIC_ID>",
+            "api_key":"<API_KEY_ID>",
+            "android_channel_id":"<CHANNEL_ID>",
         }
     },
     "openhab":{
