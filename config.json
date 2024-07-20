@@ -4,6 +4,9 @@
         "use_auth":true,
         "use_alerts":true,
         "use_openhab":false,
+        "use_ifttt":false,
+        "allow_api":false,
+        "api_key":"<static key here>"
     },
     "alerts":{
         "time_to_wait":10,
@@ -28,7 +31,7 @@
             "chat_id":"<CHAT_ID>",
             "api_token":"<API_TOKEN>"
         },
-        "firebase":{
+        "firebase:{
             "topic":"<TOPIC_ID>",
             "api_key":"<API_KEY_ID>",
             "android_channel_id":"<CHANNEL_ID>",
@@ -43,8 +46,11 @@
     },
     "site":{
         "port":8081,
+        "port_secure":8444,
         "username":"user",
         "password":"12345",
+        "ssl_key":"/home/pi/garage-door-controller-cert/localhost.key",
+        "ssl_cert":"/home/pi/garage-door-controller-cert/localhost.crt"
     },
     "doors":{
         "left":{
@@ -54,7 +60,9 @@
             "state_pin_closed_value":0,
             "approx_time_to_close":15,
             "approx_time_to_open":15,
-            "openhab_name":"g_door_big"
+            "openhab_name":"g_door_big",
+            "ifttt_event_open":"g_door_big_open",
+            "ifttt_event_close":"g_door_big_close"
         },
         "right":{
             "name":"SMALL",
@@ -63,7 +71,9 @@
             "state_pin_closed_value":0,
             "approx_time_to_close":15,
             "approx_time_to_open":15,
-            "openhab_name":"g_door_small"
+            "openhab_name":"g_door_small",
+            "ifttt_event_open":"g_door_small_open",
+            "ifttt_event_close":"g_door_small_close"
         }
     }
 }
